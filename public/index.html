@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Contact List App</title>
+    <!-- bootstrap -->
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+  </head>
+  <body ng-app='ContactListApp'>
+    <div class="container" ng-controller='AppCtrl as vm'>
+      <h1>Contact List App</h1>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Number</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><input class='form-control' placeholder='Name...' type="text" ng-model='vm.contact.name'></td>
+            <td><input class='form-control' placeholder='Email...' type="text" ng-model='vm.contact.email'></td>
+            <td><input class='form-control' placeholder='Number...' type="text" ng-model='vm.contact.number'></td>
+            <td><button type="button" class="btn btn-primary" name="button" ng-click='vm.add()'>Add Contact</button></td>
+            <td><button type="button" class="btn btn-info" ng-click='vm.update()'>Update</button>  </td>
+          </tr>
+          <tr ng-repeat='contact in vm.contacts'>
+            <td>{{contact.name}}</td>
+            <td>{{contact.email}}</td>
+            <td>{{contact.number}}</td>
+            <td>
+              <button type="button" class="btn btn-danger" ng-click='vm.delete(contact._id)'>Delete</button>
+            </td>
+            <td>
+              <button type="button" class="btn btn-warning" ng-click='vm.edit(contact)'>edit</button>
+            </td>
+
+          </tr>
+        </tbody>
+
+      </table>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="/controllers/controller.js"></script>
+
+  </body>
+</html>
