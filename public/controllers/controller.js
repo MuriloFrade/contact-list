@@ -17,12 +17,17 @@ function AppCtrl($http) {
     });
   };
 
-  vm.edit = function(contact){
-    vm.contact = contact;
+  vm.edit = function(id){
+    $http.get('/contactlist/' + id).success(function(data){
+      vm.contact = data;
+    });
   };
 
   vm.update = function(){
-
+    $http.put('/contactlist/' + vm.contact._id, vm.contact).success(function(data){
+      vm.contact = '';
+      getContacts();
+    });
   };
   function getContacts(){
     $http.get('/contactlist').success(function(data){

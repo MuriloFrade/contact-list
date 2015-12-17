@@ -26,6 +26,34 @@ app.post('/contactlist', function(req, res){
     res.json(doc);
   });
 });
+
+app.get('/contactlist/:id', function(req, res){
+  console.log('get request in /contactlist/:id');
+  var id = req.params.id;
+  db.contactlist.findOne({_id: mongojs.ObjectId(id)}, function(err, doc){
+    if(err){
+      res.json(null);
+    }
+    res.json(doc);
+  });
+});
+
+app.put('/contactlist/:id', function(req, res){
+  console.log('put request in /contactlist/:id');
+  var id = req.params.id;
+  db.contactlist.findAndModify({
+    query: { _id: mongojs.ObjectId(id) },
+    update: {$set: { name: req.body.name, email: req.body.email, number: req.body.number }},
+    new: true
+  }, function(err, doc){
+    if(err){
+      res.json(null);
+    }
+    res.json(doc);
+  });
+});
+
+
 app.delete('/contactlist/:id', function(req, res){
   console.log('delete request in /contactlist/:id');
   var id = req.params.id;
